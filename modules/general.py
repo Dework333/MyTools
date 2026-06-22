@@ -1,0 +1,46 @@
+import os
+#from rich.console import Console
+from rich import print as rprint
+
+
+def print_error(error_text: str):
+	rprint(f'[red bold]Error[/]: {error_text}!')
+
+
+def print_warning():
+	pass
+
+
+def print_status(status: bool, result: str,  name: str = None, reason: str = None):
+	if not status and reason is None:
+		print_error('reason not written')
+		return
+
+	if not name:
+		name = '[yellow]N/A[/]'
+
+	reason_list = {
+		'enough': 'Not enough arguments',
+		'empty' : 'List is empty',
+		'exist' : f'{name} already exists',
+		'nexist': f"{name} doesn't exist",
+	}
+
+	if reason not in reason_list:
+		print_error('reason not in list')
+		return
+
+	is_success = '[bold green] * Successful[/]' if status else '[bold red] * Unsuccesful[/]'
+	res_suffix = f'{result}d' if result[-1:] == 'e' else f'{result}ed'
+	result_is  = f'{res_suffix}' if status else f'not {res_suffix}' 
+	reason_is  = f'Reason: [bold red]{reason_list[reason]}[/]'
+
+	rprint(f'{is_success}: {name} was {result_is}. {reason_is}')
+
+
+def save(file_path, data):
+	pass
+
+
+def wipe():
+	os.system('clear' if os.name == 'posix' else 'cls')
