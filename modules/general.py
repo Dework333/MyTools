@@ -1,6 +1,17 @@
 import os
-#from rich.console import Console
+import json
 from rich import print as rprint
+from pathlib import Path
+
+
+# TEST PATH
+path = Path(r'C:\Users\user\Desktop\test\data.json')
+if path.exists():
+	with open(path, 'r') as f:
+		data = json.loads(f)
+else:
+	with open(r'C:\Users\user\Desktop\test\data.json', 'w') as f:
+		f.write('{}')
 
 
 def print_error(error_text: str):
