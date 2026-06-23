@@ -8,7 +8,7 @@ from pathlib import Path
 path = Path(r'C:\Users\user\Desktop\test\data.json')
 if path.exists():
 	with open(path, 'r') as f:
-		data = json.loads(f)
+		data = json.load(f)
 else:
 	with open(r'C:\Users\user\Desktop\test\data.json', 'w') as f:
 		f.write('{}')
@@ -36,13 +36,13 @@ def print_status(status: bool, result: str,  name: str = None, reason: str = Non
 		'nexist': f"{name} doesn't exist",
 	}
 
-	if reason not in reason_list:
+	if not status and reason not in reason_list:
 		return print_error('reason not in list')
 
 	is_success = '[bold green] * Successful[/]' if status else '[bold red] * Unsuccesful[/]'
 	res_suffix = f'{result}d' if result[-1:] == 'e' else f'{result}ed'
 	result_is  = f'{res_suffix}' if status else f'not {res_suffix}' 
-	reason_is  = f'Reason: [bold red]{reason_list[reason]}[/]'
+	reason_is  = f'Reason: [bold red]{reason_list[reason]}[/]' if not is_success else ""
 
 	return (f'{is_success}: {name} was {result_is}. {reason_is}')
 
