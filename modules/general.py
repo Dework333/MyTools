@@ -19,7 +19,7 @@ def print_error(error_text: str):
 
 
 def print_warning():
-	pass
+	return 'warning'
 
 
 def print_status(status: bool, result: str,  name: str = None, reason: str = None):
@@ -30,10 +30,11 @@ def print_status(status: bool, result: str,  name: str = None, reason: str = Non
 		name = '[yellow]N/A[/]'
 
 	reason_list = {
-		'enough': 'Not enough arguments',
-		'empty' : 'List is empty',
-		'exist' : f'{name} already exists',
-		'nexist': f"{name} doesn't exist",
+		'enough'   : 'Not enough arguments',
+		'empty'    : 'List is empty',
+		'exist'    : f'{name} already exists',
+		'nexist'   : f"{name} doesn't exist",
+		'incorrect': 'incorrect task name'
 	}
 
 	if not status and reason not in reason_list:
